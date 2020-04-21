@@ -5,3 +5,7 @@ api-version: 1.13
 authors: [CoffeBee, Lehatr]
 description: This is plugin implments minecraft programming competition
 website: github.com/CoffeBee/Codewars
+commands:
+  codewars:
+    description: "command to setup code wars"
+    aliases: [cw]
