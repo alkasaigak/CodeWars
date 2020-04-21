@@ -1,5 +1,5 @@
 worlds: ['test']
 test:
-  maxPlayers : 15
-  minPlayers : 10
-  teamSize : 3
+  maxPlayerNumber : 15
+  minPlayerNumber : 10
+  maxPlayerPerTeam : 3
