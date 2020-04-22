@@ -6,6 +6,6 @@ authors: [CoffeBee, Lehatr]
 description: This is plugin implments minecraft programming competition
 website: github.com/CoffeBee/Codewars
 commands:
-  codewars:
+  cw:
     description: "command to setup code wars"
-    aliases: [cw]
+    aliases: [codewars]

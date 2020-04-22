@@ -27,6 +27,8 @@ public class CommandManager implements CommandExecutor {
         plugin.getCommand(main).setExecutor(this);
 
         this.commands.add(new CreateCommand());
+        this.commands.add(new SettingCommand());
+        this.commands.add(new SetLobbyCommand());
     }
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {

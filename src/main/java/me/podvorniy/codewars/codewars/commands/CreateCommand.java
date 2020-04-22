@@ -1,25 +1,31 @@
 package me.podvorniy.codewars.codewars.commands;
 
 import me.podvorniy.codewars.codewars.CodeWars;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
+import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.generator.ChunkGenerator;
 
 import java.util.List;
+import java.util.Random;
 
 public class CreateCommand extends SubCommand {
     @Override
     public void onCommand(Player player, String[] args, CodeWars plugin) {
-        if (args.length == 0) {
+        if (args.length == 1) {
             player.sendMessage("Please write map name");
+            return;
         }
-        World new_world = (new WorldCreator("map_" + args[0])).createWorld();
-        player.teleport(new Location(new_world, 0, 0, 0));
-        player.sendMessage("New map has benn created suceessfully");
+        System.out.println(args[1]);
+        String world_name = "map_" + args[1];
+        String command = "mv create " + world_name + " NORMAL -g VoidGenerator:THE_VOID -t FLAT";
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+        player.sendMessage("New map created");
         List<String> worlds = plugin.getConfig().getStringList("worlds");
-        worlds.add(args[0]);
+        worlds.add("map_" + args[1]);
         plugin.getConfig().set("worlds", worlds);
+        plugin.saveConfig();
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv tp " + player.getName() + " map_" + args[1]);
     }
 
     @Override
