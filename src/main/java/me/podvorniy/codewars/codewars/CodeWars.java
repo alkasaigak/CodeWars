@@ -1,10 +1,19 @@
 package me.podvorniy.codewars.codewars;
 import me.podvorniy.codewars.codewars.commands.CommandManager;
+import me.podvorniy.codewars.codewars.gameManager.Game;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 public final class CodeWars extends JavaPlugin {
     private static CodeWars instance;
     public CommandManager commandManager;
+    private Map<Player, Game> playerToGame = new HashMap<>();
+    private Game nowGame = null;
     @Override
     public void onEnable() {
         setInstance(this);
@@ -24,5 +33,15 @@ public final class CodeWars extends JavaPlugin {
 
     private static void setInstance(CodeWars instance) {
         CodeWars.instance = instance;
+    }
+
+    public void  addPLayer(Player player) {
+        if (nowGame == null) {
+            nowGame = new Game(getConfig().getStringList("worlds").get(0), UUID.randomUUID(), this);
+        }
+        if (!nowGame.isAcceptPlayers()) {
+            nowGame = new Game(getConfig().getStringList("worlds").get(0), UUID.randomUUID(), this);
+        }
+        nowGame.addPlayer(player);
     }
 }

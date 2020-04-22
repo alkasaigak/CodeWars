@@ -24,7 +24,7 @@ public class Game {
     private List<Player> players;
     private Map<Player, Team> playerToTeam = new HashMap<>();
     private UUID id;
-    Game(String name, UUID id, Plugin plugin) {
+    public Game(String name, UUID id, Plugin plugin) {
         this.name = name;
         this.id = id;
         this.world = (new WorldCreator(name + id.toString())).createWorld();
@@ -63,6 +63,12 @@ public class Game {
                 break;
             }
         }
+    }
+    public boolean isAcceptPlayers() {
+        if (gameState == GameState.ACTIVE) {
+            return false;
+        }
+        return players.size() != maxPlayerNumber;
     }
     public boolean deleteWorld(File path) {
         if(path.exists()) {
